@@ -12,12 +12,14 @@ public class Producer {
     private Integer id;
     private String name;
     private String image;
+    private String origin;
 
 
-    public Producer(Integer id, String name, String image) {
+    public Producer(Integer id, String name, String image, String origin) {
         this.id = id;
         this.name = name;
         this.image = image;
+        this.origin = origin;
     }
 
     public Producer() {
@@ -45,5 +47,13 @@ public class Producer {
 
     public void setImage(String image) {
         this.image = image;
+    }
+
+    public String getOrigin() {
+        return origin;
+    }
+
+    public void setOrigin(String origin) {
+        this.origin = origin;
     }
 }

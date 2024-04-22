@@ -13,39 +13,38 @@ public class Product {
     private Integer id;
     private String name;
     private String description;
-    private LocalDate expiry;
-    private Long quantity;
-    private Long sold;
-    private Long price;
+    private String ingredient;
+
     @Column(columnDefinition = "bit(1) default 0")
     private Boolean isDelete;
     @ManyToOne
     @JoinColumn(name = "id_producer")
     private Producer producer;
 
-    @ManyToOne
-    @JoinColumn(name = "id_type")
-    private Type type;
-    private Integer discount;
-
     @OneToMany(mappedBy = "product")
     @JsonBackReference
     private List<CosmeticsSize> cosmeticsSizeList;
+    @ManyToOne
+    @JoinColumn(name = "id_color")
+    private Color color;
+    @ManyToOne
+    @JoinColumn(name = "id_incense")
+    private Incense incense;
+    @ManyToOne
+    @JoinColumn(name = "id_skin")
+    private Skin skin;
 
-
-    public Product(Integer id, String name, String description, LocalDate expiry, Long quantity, Long sold, Long price, Boolean isDelete, Producer producer, Type type, Integer discount, List<CosmeticsSize> cosmeticsSizeList) {
+    public Product(Integer id, String name, String description, String ingredient, Boolean isDelete, Producer producer, List<CosmeticsSize> cosmeticsSizeList, Color color, Incense incense, Skin skin) {
         this.id = id;
         this.name = name;
         this.description = description;
-        this.expiry = expiry;
-        this.quantity = quantity;
-        this.sold = sold;
-        this.price = price;
+        this.ingredient = ingredient;
         this.isDelete = isDelete;
         this.producer = producer;
-        this.type = type;
-        this.discount = discount;
         this.cosmeticsSizeList = cosmeticsSizeList;
+        this.color = color;
+        this.incense = incense;
+        this.skin = skin;
     }
 
     public Product() {
@@ -67,13 +66,7 @@ public class Product {
         this.name = name;
     }
 
-    public Long getQuantity() {
-        return quantity;
-    }
 
-    public void setQuantity(Long quantity) {
-        this.quantity = quantity;
-    }
 
     public Boolean getDelete() {
         return isDelete;
@@ -99,39 +92,6 @@ public class Product {
         this.description = description;
     }
 
-    public LocalDate getExpiry() {
-        return expiry;
-    }
-
-    public void setExpiry(LocalDate expiry) {
-        this.expiry = expiry;
-    }
-
-
-    public Long getPrice() {
-        return price;
-    }
-
-    public void setPrice(Long price) {
-        this.price = price;
-    }
-
-    public Type getType() {
-        return type;
-    }
-
-    public void setType(Type type) {
-        this.type = type;
-    }
-
-    public Integer getDiscount() {
-        return discount;
-    }
-
-    public void setDiscount(Integer discount) {
-        this.discount = discount;
-    }
-
 
     public List<CosmeticsSize> getCosmeticsSizeList() {
         return cosmeticsSizeList;
@@ -141,11 +101,35 @@ public class Product {
         this.cosmeticsSizeList = cosmeticsSizeList;
     }
 
-    public Long getSold() {
-        return sold;
+    public Color getColor() {
+        return color;
     }
 
-    public void setSold(Long sold) {
-        this.sold = sold;
+    public void setColor(Color color) {
+        this.color = color;
+    }
+
+    public Incense getIncense() {
+        return incense;
+    }
+
+    public void setIncense(Incense incense) {
+        this.incense = incense;
+    }
+
+    public Skin getSkin() {
+        return skin;
+    }
+
+    public void setSkin(Skin skin) {
+        this.skin = skin;
+    }
+
+    public String getIngredient() {
+        return ingredient;
+    }
+
+    public void setIngredient(String ingredient) {
+        this.ingredient = ingredient;
     }
 }

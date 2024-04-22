@@ -16,11 +16,7 @@ public class ProductService implements IProductService{
     @Autowired
     private IProductRepository productRepository;
 
-    @Override
-    public Page<ProductDto> findAllPage(RequestDto requestDto) {
-        Pageable pageable = PageRequest.of(requestDto.getPage(), requestDto.getSize());
-        return productRepository.findAllPage(requestDto,pageable);
-    }
+
 
     @Override
     public Page<CosmeticsDto> getAllPage(RequestDto requestDto) {

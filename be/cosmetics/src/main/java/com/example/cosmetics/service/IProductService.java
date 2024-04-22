@@ -6,7 +6,6 @@ import com.example.cosmetics.dto.RequestDto;
 import org.springframework.data.domain.Page;
 
 public interface IProductService {
-    Page<ProductDto> findAllPage(RequestDto requestDto);
 
 
     Page<CosmeticsDto> getAllPage(RequestDto requestDto);

@@ -3,19 +3,22 @@ package com.example.cosmetics.model;
 import jakarta.persistence.*;
 
 @Entity
-public class Type {
+public class TypeDetail {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String name;
+    @ManyToOne
+    @JoinColumn(name = "id_type")
+    private Type type;
 
-
-    public Type(Integer id, String name) {
+    public TypeDetail(Integer id, String name, Type type) {
         this.id = id;
         this.name = name;
+        this.type = type;
     }
 
-    public Type() {
+    public TypeDetail() {
     }
 
     public Integer getId() {
@@ -34,4 +37,11 @@ public class Type {
         this.name = name;
     }
 
+    public Type getType() {
+        return type;
+    }
+
+    public void setType(Type type) {
+        this.type = type;
+    }
 }

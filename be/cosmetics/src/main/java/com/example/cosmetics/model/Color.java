@@ -1,21 +1,23 @@
 package com.example.cosmetics.model;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 
 @Entity
-public class Type {
+public class Color {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String name;
 
-
-    public Type(Integer id, String name) {
+    public Color(Integer id, String name) {
         this.id = id;
         this.name = name;
     }
 
-    public Type() {
+    public Color() {
     }
 
     public Integer getId() {
@@ -33,5 +35,4 @@ public class Type {
     public void setName(String name) {
         this.name = name;
     }
-
 }
