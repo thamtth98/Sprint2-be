@@ -10,6 +10,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
+import java.util.List;
+
 public interface IProductRepository extends JpaRepository<Product,Integer> {
 
 //    @Query(value = " select p.id as id, p.name as name, p.description as description," +
@@ -49,4 +51,13 @@ public interface IProductRepository extends JpaRepository<Product,Integer> {
             " where cs.id = :#{#idProduct}"+
             " and p.isDelete = false")
     CosmeticsDto findByIdProduct(@Param("idProduct") int idProduct);
+
+    @Query(value = " select cs.id as id, cs as cosmeticsSize, s as size, p as product" +
+            " from Product p" +
+            " join Producer pc on p.producer.id = pc.id" +
+            " join CosmeticsSize cs on cs.product.id = p.id" +
+            " join Size s on s.id = cs.size.id" +
+            " where cs.name = :#{#cosmeticsDto.cosmeticsSize.name}"+
+            " and p.isDelete = false")
+    List<CosmeticsDto> findByNameType(@Param("cosmeticsDto") CosmeticsDto cosmeticsDto);
 }

@@ -11,6 +11,8 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class ProductService implements IProductService{
     @Autowired
@@ -27,6 +29,11 @@ public class ProductService implements IProductService{
     @Override
     public CosmeticsDto findById(int idProduct) {
         return productRepository.findByIdProduct(idProduct);
+    }
+
+    @Override
+    public List<CosmeticsDto> findByNameType(CosmeticsDto cosmeticsDto) {
+        return productRepository.findByNameType(cosmeticsDto);
     }
 
 
