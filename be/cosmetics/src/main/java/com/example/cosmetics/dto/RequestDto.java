@@ -7,13 +7,16 @@ public class RequestDto {
     private Integer idType;
     private Integer idSize;
     private String nameSearch;
+    private String color;
 
-    public RequestDto(Integer page, Integer size, Integer idProducer, Integer idType, Integer idSize) {
+    public RequestDto(Integer page, Integer size, Integer idProducer, Integer idType, Integer idSize, String nameSearch, String color) {
         this.page = page;
         this.size = size;
         this.idProducer = idProducer;
         this.idType = idType;
         this.idSize = idSize;
+        this.nameSearch = nameSearch;
+        this.color = color;
     }
 
     public RequestDto() {
@@ -34,8 +37,6 @@ public class RequestDto {
     public void setSize(Integer size) {
         this.size = size;
     }
-
-
 
     public Integer getIdProducer() {
         return idProducer;
@@ -67,5 +68,13 @@ public class RequestDto {
 
     public void setNameSearch(String nameSearch) {
         this.nameSearch = nameSearch;
+    }
+
+    public String getColor() {
+        return color;
+    }
+
+    public void setColor(String color) {
+        this.color = color;
     }
 }

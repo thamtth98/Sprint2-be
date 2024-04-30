@@ -36,5 +36,4 @@ public class ProductController {
         List<CosmeticsDto> cosmeticsDtoList = productService.findByNameType(cosmeticsDto);
         return new ResponseEntity<>(cosmeticsDtoList,HttpStatus.OK);
     }
-
 }
