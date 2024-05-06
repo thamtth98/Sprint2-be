@@ -24,6 +24,11 @@ public class ProductController {
         Page<CosmeticsDto> cosmeticsSizeDtoPage = productService.getAllPage(requestDto);
         return new ResponseEntity<>(cosmeticsSizeDtoPage, HttpStatus.OK);
     }
+    @PostMapping("/product/list")
+    private ResponseEntity<List<CosmeticsDto>> getList(@RequestBody RequestDto requestDto) {
+        List<CosmeticsDto> cosmeticsDtoList = productService.getAllList(requestDto);
+        return new ResponseEntity<>(cosmeticsDtoList, HttpStatus.OK);
+    }
     @GetMapping("/product/{idProduct}")
     public ResponseEntity<?> getProductById(@PathVariable int idProduct){
         CosmeticsDto cosmeticsDto = productService.findById(idProduct);
@@ -36,4 +41,6 @@ public class ProductController {
         List<CosmeticsDto> cosmeticsDtoList = productService.findByNameType(cosmeticsDto);
         return new ResponseEntity<>(cosmeticsDtoList,HttpStatus.OK);
     }
+
+
 }

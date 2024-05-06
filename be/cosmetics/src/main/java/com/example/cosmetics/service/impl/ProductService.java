@@ -36,5 +36,10 @@ public class ProductService implements IProductService{
         return productRepository.findByNameType(cosmeticsDto);
     }
 
+    @Override
+    public List<CosmeticsDto> getAllList(RequestDto requestDto) {
+        return productRepository.findAllList(requestDto);
+    }
+
 
 }

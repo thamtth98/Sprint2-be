@@ -3,6 +3,7 @@ package com.example.cosmetics.model;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
+import java.util.Set;
 
 @Entity
 public class Account {
@@ -20,9 +21,9 @@ public class Account {
     private Boolean isDelete;
     @ManyToOne
     @JoinColumn(name = "id_role")
-    private Role role;
+    private Role roles;
 
-    public Account(Integer id, String username, String fullname, String email, String phoneNumber, String address, String password, LocalDate createAt, Boolean isDelete, Role role) {
+    public Account(Integer id, String username, String fullname, String email, String phoneNumber, String address, String password, LocalDate createAt, Boolean isDelete, Role roles) {
         this.id = id;
         this.username = username;
         this.fullname = fullname;
@@ -32,7 +33,7 @@ public class Account {
         this.password = password;
         this.createAt = createAt;
         this.isDelete = isDelete;
-        this.role = role;
+        this.roles = roles;
     }
 
     public Account() {
@@ -54,12 +55,12 @@ public class Account {
         this.username = username;
     }
 
-    public Role getRole() {
-        return role;
+    public Role getRoles() {
+        return roles;
     }
 
-    public void setRole(Role role) {
-        this.role = role;
+    public void setRoles(Role roles) {
+        this.roles = roles;
     }
 
     public String getFullname() {

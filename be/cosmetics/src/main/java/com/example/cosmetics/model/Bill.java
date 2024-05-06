@@ -9,7 +9,6 @@ public class Bill {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-
     private Integer totalPay;
     private String fullname;
     private String email;

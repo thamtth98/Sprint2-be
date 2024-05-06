@@ -14,8 +14,8 @@ public class OrderCosmetics {
     private Bill bill;
 
     @ManyToOne
-    @JoinColumn
-    private Product product;
+    @JoinColumn(name = "id_cosmetics_size ")
+    private CosmeticsSize cosmeticsSize;
     @ManyToOne
     @JoinColumn(name = "id_account")
     private Account account;
@@ -23,10 +23,10 @@ public class OrderCosmetics {
     private Long total;
     private Integer quantity;
 
-    public OrderCosmetics(Integer id, Bill bill, Product product, Account account, Long total, Integer quantity) {
+    public OrderCosmetics(Integer id, Bill bill, CosmeticsSize cosmeticsSize, Account account, Long total, Integer quantity) {
         this.id = id;
         this.bill = bill;
-        this.product = product;
+        this.cosmeticsSize = cosmeticsSize;
         this.account = account;
         this.total = total;
         this.quantity = quantity;
@@ -68,12 +68,12 @@ public class OrderCosmetics {
         this.total = total;
     }
 
-    public Product getProduct() {
-        return product;
+    public CosmeticsSize getCosmeticsSize() {
+        return cosmeticsSize;
     }
 
-    public void setProduct(Product product) {
-        this.product = product;
+    public void setCosmeticsSize(CosmeticsSize cosmeticsSize) {
+        this.cosmeticsSize = cosmeticsSize;
     }
 
     public Integer getQuantity() {

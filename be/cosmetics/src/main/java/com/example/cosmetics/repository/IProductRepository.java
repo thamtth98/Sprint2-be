@@ -35,8 +35,8 @@ public interface IProductRepository extends JpaRepository<Product,Integer> {
             " join Producer pc on p.producer.id = pc.id" +
             " join CosmeticsSize cs on cs.product.id = p.id" +
             " join Size s on s.id = cs.size.id" +
-            " where (p.name like concat('%', :#{#requestDto.nameSearch} , '%') " +
-            " or p.producer.name like concat('%', :#{#requestDto.nameSearch} , '%'))" +
+            " where (cs.product.name like concat('%', :#{#requestDto.nameSearch} , '%') " +
+            " or cs.product.producer.name like concat('%', :#{#requestDto.nameSearch} , '%'))" +
             " and (cs.product.producer.id = :#{#requestDto.idProducer} or :#{#requestDto.idProducer}=-1)" +
             " and (cs.typeDetail.id = :#{#requestDto.idType} or :#{#requestDto.idType} = -1)" +
             " and (s.id = :#{#requestDto.idSize} or :#{#requestDto.idSize} = -1)" +
@@ -60,4 +60,16 @@ public interface IProductRepository extends JpaRepository<Product,Integer> {
             " where cs.name = :#{#cosmeticsDto.cosmeticsSize.name}"+
             " and p.isDelete = false")
     List<CosmeticsDto> findByNameType(@Param("cosmeticsDto") CosmeticsDto cosmeticsDto);
+    @Query(value = " select cs.id as id, cs as cosmeticsSize, s as size, p as product" +
+            " from Product p" +
+            " join Producer pc on p.producer.id = pc.id" +
+            " join CosmeticsSize cs on cs.product.id = p.id" +
+            " join Size s on s.id = cs.size.id" +
+            " where (cs.product.name like concat('%', :#{#requestDto.nameSearch} , '%') " +
+            " or cs.product.producer.name like concat('%', :#{#requestDto.nameSearch} , '%'))" +
+            " and (cs.product.producer.id = :#{#requestDto.idProducer} or :#{#requestDto.idProducer}=-1)" +
+            " and (cs.typeDetail.id = :#{#requestDto.idType} or :#{#requestDto.idType} = -1)" +
+            " and (s.id = :#{#requestDto.idSize} or :#{#requestDto.idSize} = -1)" +
+            " and p.isDelete = false")
+    List<CosmeticsDto> findAllList(@Param("requestDto") RequestDto requestDto);
 }

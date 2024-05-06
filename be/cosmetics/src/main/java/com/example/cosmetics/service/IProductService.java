@@ -15,4 +15,6 @@ public interface IProductService {
     CosmeticsDto findById(int idProduct);
 
     List<CosmeticsDto> findByNameType(CosmeticsDto cosmeticsDto);
+
+    List<CosmeticsDto> getAllList(RequestDto requestDto);
 }
