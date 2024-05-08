@@ -32,7 +32,7 @@ public class CosmeticSizeService implements ICosmeticSizeService {
 
         Long totalPrice = 0L;
         for (OrderCosmetics cosmetics : orderCosmeticsList) {
-            totalPrice += cosmetics.getQuantity() * cosmetics.getCosmeticsSize().getQuantity();
+            totalPrice += cosmetics.getCosmeticsSize().getPrice() * cosmetics.getQuantity();
         }
 
         bill.setTotalPay(totalPrice);

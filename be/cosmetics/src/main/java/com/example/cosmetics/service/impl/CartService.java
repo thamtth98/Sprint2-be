@@ -25,12 +25,15 @@ public class CartService implements ICartService {
     @Override
     public void save(OrderDto orderDto) {
         Integer count = 0;
-        Integer quantity = 0;
+        Long quantity = 0L;
+        Long quantityCount = 0L;
         List<OrderCosmetics> orderCosmeticsList = getCartFromData(orderDto.getIdAccount());
         for (OrderCosmetics orderCosmetics : orderCosmeticsList) {
             if (orderCosmetics.getCosmeticsSize().getId() == orderDto.getIdCosmeticsSize()) {
                 count++;
-                quantity = orderCosmetics.getQuantity();
+                if(orderDto.getQuantity() <= orderCosmetics.getCosmeticsSize().getQuantity() - orderCosmetics.getQuantity()){
+                    quantity = Long.valueOf(orderCosmetics.getQuantity()); //lưu số lượng cuar sản phẩm đã có trong cart
+                }
             }
         }
         if(count > 0){

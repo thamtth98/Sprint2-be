@@ -15,15 +15,17 @@ public class OrderDto {
     private Integer idAccount;
 
     private Long total;
-    private Integer quantity;
+    private Long quantity;
+    private Integer quantityReal;
 
-    public OrderDto(Integer id, Integer idBill, Integer idCosmeticsSize, Integer idAccount, Long total, Integer quantity) {
+    public OrderDto(Integer id, Integer idBill, Integer idCosmeticsSize, Integer idAccount, Long total, Long quantity, Integer quantityReal) {
         this.id = id;
         this.idBill = idBill;
         this.idCosmeticsSize = idCosmeticsSize;
         this.idAccount = idAccount;
         this.total = total;
         this.quantity = quantity;
+        this.quantityReal = quantityReal;
     }
 
     public OrderDto() {
@@ -69,11 +71,19 @@ public class OrderDto {
         this.total = total;
     }
 
-    public Integer getQuantity() {
+    public Long getQuantity() {
         return quantity;
     }
 
-    public void setQuantity(Integer quantity) {
+    public void setQuantity(Long quantity) {
         this.quantity = quantity;
+    }
+
+    public Integer getQuantityReal() {
+        return quantityReal;
+    }
+
+    public void setQuantityReal(Integer quantityReal) {
+        this.quantityReal = quantityReal;
     }
 }
