@@ -20,21 +20,20 @@ public class CartController {
     @Autowired
     private ICartService cartService;
 
-    @PreAuthorize("hasAnyRole('ROLE_USER', 'ROLE_ADMIN')")
     @GetMapping("")
     public ResponseEntity<List<OrderCosmetics>> getCartItems() {
         List<OrderCosmetics> orderCosmeticsList = cartService.findAll();
         return new ResponseEntity<>(orderCosmeticsList, HttpStatus.OK);
     }
 
-    @PreAuthorize("hasAnyRole('ROLE_USER', 'ROLE_ADMIN')")
     @PostMapping("/addToCart")
     public ResponseEntity<?> addToCart(@RequestBody List<OrderDto> orderDtoList) {
-            for (OrderDto orderDto:orderDtoList){
+        for (OrderDto orderDto : orderDtoList) {
             cartService.save(orderDto);
         }
         return new ResponseEntity<>(HttpStatus.OK);
     }
+
     @GetMapping("/getAllList")
     public ResponseEntity<List<OrderCosmetics>> getCartFromData(@RequestParam Integer id) {
         List<OrderCosmetics> orderCosmeticsList = cartService.getCartFromData(id);

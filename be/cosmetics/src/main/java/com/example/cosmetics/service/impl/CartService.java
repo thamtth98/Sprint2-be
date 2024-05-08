@@ -24,17 +24,22 @@ public class CartService implements ICartService {
 
     @Override
     public void save(OrderDto orderDto) {
+        Integer count = 0;
+        Integer quantity = 0;
         List<OrderCosmetics> orderCosmeticsList = getCartFromData(orderDto.getIdAccount());
-        for(OrderCosmetics orderCosmetics: orderCosmeticsList){
-            if(orderCosmetics.getCosmeticsSize().getId() != orderDto.getIdCosmeticsSize()){
-                cartRepository.saveOrder(orderDto);
-            }else {
-                orderDto.setQuantity(orderDto.getQuantity()+orderCosmetics.getQuantity());
-                cartRepository.saveOrder(orderDto);
+        for (OrderCosmetics orderCosmetics : orderCosmeticsList) {
+            if (orderCosmetics.getCosmeticsSize().getId() == orderDto.getIdCosmeticsSize()) {
+                count++;
+                quantity = orderCosmetics.getQuantity();
             }
         }
+        if(count > 0){
+            orderDto.setQuantity(orderDto.getQuantity() + quantity);
+            cartRepository.saveDto(orderDto);
+        }else {
+            cartRepository.saveOrder(orderDto);
+        }
     }
-
 
 
     @Override

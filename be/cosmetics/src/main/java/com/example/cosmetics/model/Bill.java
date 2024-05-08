@@ -9,7 +9,7 @@ public class Bill {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    private Integer totalPay;
+    private Long totalPay;
     private String fullname;
     private String email;
     private String phoneNumber;
@@ -18,7 +18,7 @@ public class Bill {
     private LocalDate orderDay;
     private String status;
 
-    public Bill(Integer id, Integer totalPay, String fullname, String email, String phoneNumber, String address, String note, LocalDate orderDay, String status) {
+    public Bill(Integer id, Long totalPay, String fullname, String email, String phoneNumber, String address, String note, LocalDate orderDay, String status) {
         this.id = id;
         this.totalPay = totalPay;
         this.fullname = fullname;
@@ -41,11 +41,11 @@ public class Bill {
         this.id = id;
     }
 
-    public Integer getTotalPay() {
+    public Long getTotalPay() {
         return totalPay;
     }
 
-    public void setTotalPay(Integer totalPay) {
+    public void setTotalPay(Long totalPay) {
         this.totalPay = totalPay;
     }
 

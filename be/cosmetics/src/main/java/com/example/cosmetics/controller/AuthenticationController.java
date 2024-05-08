@@ -2,6 +2,10 @@ package com.example.cosmetics.controller;
 
 import com.example.cosmetics.config.service.JwtResponse;
 import com.example.cosmetics.config.service.JwtService;
+import com.example.cosmetics.dto.ProductDto;
+import com.example.cosmetics.model.CosmeticsSize;
+import com.example.cosmetics.service.ICartService;
+import com.example.cosmetics.service.ICosmeticSizeService;
 import com.example.cosmetics.service.impl.AccountService;
 import com.example.cosmetics.model.Account;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +16,8 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @CrossOrigin("*")
@@ -25,6 +31,10 @@ public class AuthenticationController {
 
     @Autowired
     private AccountService accountService;
+    @Autowired
+    private ICosmeticSizeService cosmeticSizeService;
+    @Autowired
+    private ICartService cartService;
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody Account account) {
         Authentication authentication
@@ -40,14 +50,24 @@ public class AuthenticationController {
     public ResponseEntity<?> getInfo(@RequestHeader("Authorization")String token) {
         String newToken = token.substring(7);
         String userName = jwtService.getUsernameFromJwtToken(newToken);
-        System.out.println(userName);
-        return ResponseEntity.ok(userName);
+        Account user = accountService.findByUsername(userName);
+        user.setPassword("");
+        return ResponseEntity.ok(user);
+    }
+    @GetMapping("/getInfoCart")
+    public ResponseEntity<?> getInfoAndCart(@RequestHeader("Authorization")String token) {
+        String newToken = token.substring(7);
+        String userName = jwtService.getUsernameFromJwtToken(newToken);
+        Account user = accountService.findByUsername(userName);
+//        List<CosmeticsSize> courses = cosmeticSizeService.findAllCartByIdAccount(user.getId());
+//        Integer size = courses.size();
+//        String result = userName + "," + size;
+        return ResponseEntity.ok(user);
     }
 
     @PostMapping("/logout")
-    public ResponseEntity<?> logoutSuccessful(@RequestHeader("Authorization")String token){
-        String newToken = token.substring(7);
-        jwtService.addToBlackList(newToken);
+    public ResponseEntity<?> logoutSuccessful(){
+        SecurityContextHolder.clearContext();
         return ResponseEntity.ok("ok dang xuat");
     }
 }

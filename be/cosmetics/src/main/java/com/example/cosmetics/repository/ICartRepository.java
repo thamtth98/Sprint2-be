@@ -21,6 +21,11 @@ public interface ICartRepository extends JpaRepository<OrderCosmetics,Integer> {
     void saveOrder(@Param("orderDto") OrderDto orderDto);
 
 
-    @Query(value = "SELECT * FROM order_cosmetics where :#{#idAccount}",nativeQuery = true)
+    @Query(value = "SELECT * FROM order_cosmetics where :#{#idAccount} and order_cosmetics.id_bill is null",nativeQuery = true)
     List<OrderCosmetics> getCartFromData(@Param("idAccount") Integer idAccount);
+
+    @Modifying
+    @Transactional
+    @Query(value = "UPDATE order_cosmetics as oc SET oc.quantity = :#{#orderDto.quantity} WHERE (id_cosmetics_size = :#{#orderDto.idCosmeticsSize})", nativeQuery = true)
+    void saveDto(@Param("orderDto") OrderDto orderDto);
 }

@@ -3,12 +3,14 @@ package com.example.cosmetics.repository;
 import com.example.cosmetics.dto.CosmeticsDto;
 import com.example.cosmetics.dto.ProductDto;
 import com.example.cosmetics.dto.RequestDto;
+import com.example.cosmetics.model.OrderCosmetics;
 import com.example.cosmetics.model.Product;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
+import org.springframework.security.core.parameters.P;
 
 import java.util.List;
 
@@ -72,4 +74,6 @@ public interface IProductRepository extends JpaRepository<Product,Integer> {
             " and (s.id = :#{#requestDto.idSize} or :#{#requestDto.idSize} = -1)" +
             " and p.isDelete = false")
     List<CosmeticsDto> findAllList(@Param("requestDto") RequestDto requestDto);
+
+
 }

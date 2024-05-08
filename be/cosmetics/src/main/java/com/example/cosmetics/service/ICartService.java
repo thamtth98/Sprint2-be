@@ -8,12 +8,10 @@ import com.example.cosmetics.model.OrderCosmetics;
 import java.util.List;
 
 public interface ICartService {
-    
 
     List<OrderCosmetics> findAll();
 
     void save(OrderDto orderDto);
-
 
     List<OrderCosmetics> getCartFromData(Integer idAccount);
 }
