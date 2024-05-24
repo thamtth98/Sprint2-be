@@ -3,6 +3,7 @@ package com.example.cosmetics.controller;
 import com.example.cosmetics.dto.CosmeticsDto;
 import com.example.cosmetics.dto.ProductDto;
 import com.example.cosmetics.dto.RequestDto;
+import com.example.cosmetics.model.CosmeticsSize;
 import com.example.cosmetics.service.IProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -41,6 +42,7 @@ public class ProductController {
         List<CosmeticsDto> cosmeticsDtoList = productService.findByNameType(cosmeticsDto);
         return new ResponseEntity<>(cosmeticsDtoList,HttpStatus.OK);
     }
+
 
 
 }

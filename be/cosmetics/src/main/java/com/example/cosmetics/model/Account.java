@@ -16,6 +16,7 @@ public class Account {
     private String phoneNumber;
     private String address;
     private String password;
+    private String avatar;
     private LocalDate createAt;
     @Column(columnDefinition = "bit(1) default 0")
     private Boolean isDelete;

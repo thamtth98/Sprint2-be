@@ -1,11 +1,12 @@
 package com.example.cosmetics.controller;
 
 import com.example.cosmetics.config.payment.PaymentConfig;
+import com.example.cosmetics.dto.BillDto;
 import com.example.cosmetics.dto.PaymentDto;
+import com.example.cosmetics.dto.PaymentInfoStorage;
 import com.example.cosmetics.model.Account;
 import com.example.cosmetics.service.IAccountService;
 import com.example.cosmetics.service.ICosmeticSizeService;
-import com.example.cosmetics.service.IProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -26,10 +27,18 @@ public class PaymentRestController {
 
     @Autowired
     private ICosmeticSizeService iProductService;
+    private final PaymentInfoStorage paymentInfoStorage;
 
-    @GetMapping("/createPay")
+    @Autowired
+    public PaymentRestController(PaymentInfoStorage paymentInfoStorage) {
+        this.paymentInfoStorage = paymentInfoStorage;
+    }
+
+    @PostMapping("/createPay")
     private ResponseEntity<?> payment(@RequestParam(value = "price") Long price,
+                                      @RequestBody BillDto billDto,
                                       @RequestParam(value = "id") Integer id) throws UnsupportedEncodingException {
+        paymentInfoStorage.setBillDto(billDto);
         long amount = price * 100;
         String orderType = "other";
         String bankCode = "NCB";
@@ -105,10 +114,11 @@ public class PaymentRestController {
                                             @RequestParam(value = "vnp_OrderInfo", required = false) String order,
                                             @RequestParam(value = "vnp_ResponseCode", required = false) String responseCode,
                                             Principal principal) {
+        BillDto billDto = paymentInfoStorage.getBillDto();
         Account account = this.iAccountService.findAccountById(id);
         if (status.equals("00")) {
             System.out.println(account.getId() + " da thanh toan thanh cong");
-            this.iProductService.addNewBill(principal.getName());
+            this.iProductService.addNewBill(billDto,principal.getName());
             return new ResponseEntity<>("success",HttpStatus.OK);
         } else {
             System.out.println(account.getFullname() + " da huy thanh toan");

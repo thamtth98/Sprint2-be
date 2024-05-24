@@ -3,6 +3,7 @@ package com.example.cosmetics.service.impl;
 import com.example.cosmetics.dto.CosmeticsDto;
 import com.example.cosmetics.dto.OrderCosDto;
 import com.example.cosmetics.dto.OrderDto;
+import com.example.cosmetics.model.Bill;
 import com.example.cosmetics.model.OrderCosmetics;
 import com.example.cosmetics.repository.ICartRepository;
 import com.example.cosmetics.service.ICartService;
@@ -26,7 +27,6 @@ public class CartService implements ICartService {
     public void save(OrderDto orderDto) {
         Integer count = 0;
         Long quantity = 0L;
-        Long quantityCount = 0L;
         List<OrderCosmetics> orderCosmeticsList = getCartFromData(orderDto.getIdAccount());
         for (OrderCosmetics orderCosmetics : orderCosmeticsList) {
             if (orderCosmetics.getCosmeticsSize().getId() == orderDto.getIdCosmeticsSize()) {
@@ -48,6 +48,21 @@ public class CartService implements ICartService {
     @Override
     public List<OrderCosmetics> getCartFromData(Integer idAccount) {
         return cartRepository.getCartFromData(idAccount);
+    }
+
+    @Override
+    public void deleteById(Integer id) {
+        cartRepository.deleteByUser(id);
+    }
+
+    @Override
+    public List<Bill> getPayment(String email) {
+        return cartRepository.getBill(email);
+    }
+
+    @Override
+    public List<OrderCosmetics> detailBill(Integer idAccount, Integer idBill) {
+        return cartRepository.detailBill(idAccount,idBill);
     }
 
 
